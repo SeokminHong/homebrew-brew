@@ -2,7 +2,7 @@ class Fenv < Formula
   desc ""
   homepage "https://github.com/SeokminHong/fenv"
   url "https://github.com/SeokminHong/fenv/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "353130208812a2601a7798e789f58d477d0ed7cce9e7399109b5bfd401888a04"
+  sha256 "1a41b79d3f38a16957ff99d44f32eda70dd09e3e9a337603ca96e9a556a472c0"
   license ""
 
   head "https://github.com/SeokminHong/fenv.git", branch: "main"
