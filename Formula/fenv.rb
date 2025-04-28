@@ -7,10 +7,14 @@ class Fenv < Formula
 
   head "https://github.com/SeokminHong/fenv.git", branch: "main"
 
+  depends_on "fish"
+
   def install
-    prefix.install "fenv.fish"
+    prefix.install "init.fish"
+    bin.install Dir["bin/*"]
   end
 
   test do
+    assert_match "0.1.0", shell_output("#{bin}/fenv version")
   end
 end
