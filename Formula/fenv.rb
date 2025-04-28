@@ -8,6 +8,8 @@ class Fenv < Formula
   sha256 "3743309b7bfda5db889ec71d0c3c8d248dd23e985cbb4d8ffdc74e36cc8fba38"
   license ""
 
+  head "https://github.com/SeokminHong/fenv.git", branch: "main"
+
   # depends_on "cmake" => :build
 
   # Additional dependency
@@ -19,8 +21,9 @@ class Fenv < Formula
   def install
     # Remove unrecognized options if they cause configure to fail
     # https://rubydoc.brew.sh/Formula.html#std_configure_args-instance_method
-    system "./configure", "--disable-silent-rules", *std_configure_args
+    # system "./configure", "--disable-silent-rules", *std_configure_args
     # system "cmake", "-S", ".", "-B", "build", *std_cmake_args
+    prefix.install "fenv.fish"
   end
 
   test do
