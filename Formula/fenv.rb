@@ -7,6 +7,13 @@ class Fenv < Formula
 
   head "https://github.com/SeokminHong/fenv.git", branch: "main"
 
+  bottle do
+    root_url "https://github.com/SeokminHong/homebrew-brew/releases/download/fenv-0.2.0"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "94bdadfe91a9e78fc93be3f9ded6f3b8222e31a732bb3b162a0d8bdab390f4a6"
+    sha256 cellar: :any_skip_relocation, ventura:       "05790a90e65fdb73d38e1f87803a753c2da5b2d8214b23f0e61a6523cd8776c0"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "31550fa537049fc9da3cc287514a983ce33a0b7d7180d141c6334242479da115"
+  end
+
   depends_on "rust" => :build
   depends_on "fish"
 
