@@ -7,8 +7,8 @@ class Fenv < Formula
 
   head "https://github.com/SeokminHong/fenv.git", branch: "main"
 
-  depends_on "fish"
   depends_on "rust" => :build
+  depends_on "fish"
 
   def install
     system "cargo", "install", "seokmin_fenv", *std_cargo_args
