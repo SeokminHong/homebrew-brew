@@ -7,14 +7,16 @@ class Vltl < Formula
 
   head "https://github.com/SeokminHong/vltl.git", branch: "main"
 
-  depends_on "rust" => :build
-  depends_on "fish"
+  on_macos do
+    depends_on "rust" => :build
+    depends_on "fish"
 
-  def install
-    system "cargo", "install", "vltl", *std_cargo_args
-  end
+    def install
+      system "cargo", "install", "vltl", *std_cargo_args
+    end
 
-  test do
-    assert_match "vltl 0.1.1", shell_output("#{bin}/vltl --version")
+    test do
+      assert_match "vltl 0.1.1", shell_output("#{bin}/vltl --version")
+    end
   end
 end
