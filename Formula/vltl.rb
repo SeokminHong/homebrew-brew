@@ -1,4 +1,4 @@
-class Fenv < Formula
+class Vltl < Formula
   desc "Fix a 2-set Korean typo to English"
   homepage "https://github.com/SeokminHong/vltl"
   url "https://github.com/SeokminHong/vltl/archive/refs/tags/v0.1.1.tar.gz"
