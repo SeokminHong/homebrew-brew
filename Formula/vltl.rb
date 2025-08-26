@@ -1,8 +1,8 @@
 class Vltl < Formula
   desc "Fix a 2-set Korean typo to English"
   homepage "https://github.com/SeokminHong/vltl"
-  url "https://github.com/SeokminHong/vltl/archive/refs/tags/v0.1.2.tar.gz"
-  sha256 "a8f53cb9ef3e26c996e6de3c1ba078b8694de4b23ae5c2790dcfde2541d85677"
+  url "https://github.com/SeokminHong/vltl/archive/refs/tags/v0.1.3.tar.gz"
+  sha256 "4cc77a30a5c699f246833e171e868396cb634f0b53ad9e9e8e646c768e6ef545"
   license "MIT"
 
   head "https://github.com/SeokminHong/vltl.git", branch: "main"
@@ -15,6 +15,6 @@ class Vltl < Formula
   end
 
   test do
-    assert_match "vltl 0.1.2", shell_output("#{bin}/vltl --version")
+    assert_match "vltl 0.1.3", shell_output("#{bin}/vltl --version")
   end
 end
