@@ -1,18 +1,15 @@
 # SeokminHong Brew
 
-## How do I install these formulae?
+## formulae
 
-`brew install seokminhong/brew/<formula>`
+- [fenv](https://github.com/SeokminHong/fenv): direnv alternative for Fish shell.
+- [vltl](https://github.com/SeokminHong/vltl): Fix Korean typo on shell for MacOS.
 
-Or `brew tap seokminhong/brew` and then `brew install <formula>`.
+## Installation
 
-Or, in a `brew bundle` `Brewfile`:
-
-```ruby
-tap "seokminhong/brew"
-brew "<formula>"
+```sh
+$ brew install seokminhong/brew/<formula>
+# OR
+$ brew tap seokminhong/brew
+$ brew install <fomula>
 ```
-
-## Documentation
-
-`brew help`, `man brew` or check [Homebrew's documentation](https://docs.brew.sh).
