@@ -2,7 +2,7 @@ class Vltl < Formula
   desc "Fix a 2-set Korean typo to English"
   homepage "https://github.com/SeokminHong/vltl"
   url "https://github.com/SeokminHong/vltl/archive/refs/tags/v0.1.5.tar.gz"
-  sha256 "9ec1f8db85a8242b43fdfb0c139608741ea5d6ae2dfecbd978e0ce2981018a33"
+  sha256 "9b1645d6736a139ccb37b80e9f161f3044ac7905604789468d8b51d71b708382"
   license "MIT"
 
   head "https://github.com/SeokminHong/vltl.git", branch: "main"
