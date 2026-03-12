@@ -9,8 +9,9 @@ class Vltl < Formula
 
   bottle do
     root_url "https://github.com/SeokminHong/homebrew-brew/releases/download/vltl-0.1.5"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "ec066e6c68e8430a9d2e9210e2777984f9c514424a26d6ccb995211e65fea4d1"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8b5d5e64519b59c0ca273d36d3335424c31bfb472c9d9bbe505f114234ac49f4"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "37188dcd7b4e53a862e9766888909edb7cbd3b74a5e419d7af2e3265eeac0243"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "795ab7895bc16e25aca7850e4f982a8ed3a0c7ff13eb6a29ad0004e95ab4839c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b5182d6b5ead46a33105814ccee39a96debd69e701d518308564b3f4c7b5b3be"
   end
 
   depends_on "rust" => :build
