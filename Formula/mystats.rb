@@ -1,17 +1,11 @@
 class Mystats < Formula
   desc "Lightweight Apple Silicon menu bar monitor for macOS"
   homepage "https://github.com/SeokminHong/mystats"
-  url "https://github.com/SeokminHong/mystats/archive/refs/tags/v0.2.3.tar.gz"
-  sha256 "7669544ab08671cc31dcecf762b43557c28016ee57d37c9c76c6c7e1f8c8c417"
+  url "https://github.com/SeokminHong/mystats/archive/refs/tags/v0.2.4.tar.gz"
+  sha256 "de2002cef60ed2e0505e1dc77c40a87b973c9fe77861e2f962ef71de4d50fdc3"
   license "MIT"
 
   head "https://github.com/SeokminHong/mystats.git", branch: "main"
-
-  bottle do
-    root_url "https://github.com/SeokminHong/homebrew-brew/releases/download/mystats-0.2.3"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "c2f995598aa6b259f51faf458681e231160de3cbc8cc63f7458bca3e738966c5"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "c0162073320b07e0ced5a4283196bc05e58c4a17427e2a9a02125fe2b8eb8b69"
-  end
 
   depends_on xcode: ["15.0", :build]
   depends_on arch: :arm64
@@ -27,6 +21,7 @@ class Mystats < Formula
 
     app_macos.install ".build/release/mystats"
     app_resources.mkpath
+    app_resources.install "Sources/MystatsApp/Resources/VERSION"
     system "swift", "script/generate_app_icon.swift", (app_resources/"AppIcon.icns").to_s
 
     (app_contents/"Info.plist").write <<~XML
@@ -72,7 +67,7 @@ class Mystats < Formula
   end
 
   test do
-    assert_match "mystats 0.2.3", shell_output("#{bin}/mystats --version")
+    assert_match "mystats 0.2.4", shell_output("#{bin}/mystats --version")
     assert_path_exists prefix/"mystats.app/Contents/MacOS/mystats"
     assert_path_exists prefix/"mystats.app/Contents/Info.plist"
   end
