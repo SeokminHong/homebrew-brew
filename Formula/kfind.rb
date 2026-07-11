@@ -9,9 +9,10 @@ class Kfind < Formula
 
   bottle do
     root_url "https://github.com/SeokminHong/homebrew-brew/releases/download/kfind-0.1.0"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "a9cf84e86c06967acf6f74f533beff14d0919978473fc06648d891a9c2fd1b60"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "89a88edf5f73cc485db991e36c0abfe97897336c348563598e7656355fa83c2c"
-    sha256 cellar: :any,                 x86_64_linux:  "9ea7238baa5dcd73ce76b6b03635f11f1d944218dbd3faa39be094100ee362bf"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d902fea9f330c7c9d2bd79105a49bee7b02f678a770af391deaae413b0f1df6d"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "6c81bbabeaec367cce77de09c8729ac679a6b496f78ad82975c36ae1d83d102f"
+    sha256 cellar: :any,                 x86_64_linux:  "bbfab690b36304bd8c3657d17e7a3da2cd255769fef673b64f77edc01b9eea6a"
   end
 
   depends_on "rust" => :build
