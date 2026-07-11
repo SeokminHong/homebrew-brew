@@ -7,6 +7,13 @@ class Fab < Formula
 
   head "https://github.com/SeokminHong/fab.git", branch: "main"
 
+  bottle do
+    root_url "https://github.com/SeokminHong/homebrew-brew/releases/download/fab-0.1.0"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "b2293173ae9b29aad1995615d06fbff3ee3c4bc082185de51e778bf18b2756e4"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e9e20a41a0072abaa18632fedbb3ad93365bcdc2da9d89d2e5026e98fbc61143"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "03223b2fd2288761c605cce5fe9528c88a308f74cbb57907598ea3c4abb2b6e1"
+  end
+
   depends_on "fish"
 
   def install
