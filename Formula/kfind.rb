@@ -1,30 +1,22 @@
 class Kfind < Formula
   desc "Fast Korean lemma and inflection search for code and documents"
   homepage "https://github.com/SeokminHong/kfind"
-  url "https://github.com/SeokminHong/kfind/releases/download/v0.1.0/kfind-0.1.0.tar.gz"
-  sha256 "6469aa3b38042da1e29118dc464d7afa27e1604ef18d01b4d22634c05f069a56"
+  url "https://github.com/SeokminHong/kfind/releases/download/v0.1.1/kfind-0.1.1.tar.gz"
+  sha256 "1304b3cd9509e3d27cfe4ea3594c01af0b609df1d9d331a5728e561c04e3d405"
   license "MIT"
 
   head "https://github.com/SeokminHong/kfind.git", branch: "main"
 
-  bottle do
-    root_url "https://github.com/SeokminHong/homebrew-brew/releases/download/kfind-0.1.0"
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d902fea9f330c7c9d2bd79105a49bee7b02f678a770af391deaae413b0f1df6d"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "6c81bbabeaec367cce77de09c8729ac679a6b496f78ad82975c36ae1d83d102f"
-    sha256 cellar: :any,                 x86_64_linux:  "bbfab690b36304bd8c3657d17e7a3da2cd255769fef673b64f77edc01b9eea6a"
-  end
-
   depends_on "rust" => :build
 
   resource "full-pos-lexicon" do
-    url "https://github.com/SeokminHong/kfind/releases/download/v0.1.0/kfind-full-pos-0.1.0.tar.gz"
-    sha256 "47cf4e88299d94f3bfe662db9f0cf21d5b0c89594b124acc7e0eef2a87820380"
+    url "https://github.com/SeokminHong/kfind/releases/download/v0.1.1/kfind-full-pos-0.1.1.tar.gz"
+    sha256 "fd4d6a09927c7aa6ebb8a1755bf2a50e9c92c251aa0a18b48436bc17aca452f7"
   end
 
   resource "distribution-assets" do
-    url "https://github.com/SeokminHong/kfind/releases/download/v0.1.0/kfind-assets-0.1.0.tar.gz"
-    sha256 "36d32be886af30344fab5bc2f013cccab975a044abefa4d0103ae518fe7b98e9"
+    url "https://github.com/SeokminHong/kfind/releases/download/v0.1.1/kfind-assets-0.1.1.tar.gz"
+    sha256 "1da1880b64e15bdaa28c6c4897864b5687ba092fa8001ad9e9a9eaadcfe014e1"
   end
 
   def install
