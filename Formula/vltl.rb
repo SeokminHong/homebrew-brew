@@ -7,6 +7,13 @@ class Vltl < Formula
 
   head "https://github.com/SeokminHong/vltl.git", branch: "main"
 
+  bottle do
+    root_url "https://github.com/SeokminHong/homebrew-brew/releases/download/vltl-0.2.2"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "033af025733c1c5ac5c9433feb4097301b24498d4ae0c2d9ec1c0680d93d89f3"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "7744ae006ea55bebb99e3a4d015208d8aaca2a763cd50aabdfbdddcb9bf0f96b"
+    sha256 cellar: :any,                 x86_64_linux:  "3cecd3af4629c7f42fa5da3659c010720251f70252933d1ec8cb47af2e22198d"
+  end
+
   depends_on "rust" => :build
   depends_on "fish"
 
