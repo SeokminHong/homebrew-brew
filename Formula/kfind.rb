@@ -1,34 +1,27 @@
 class Kfind < Formula
   desc "Fast Korean lemma and inflection search for code and documents"
   homepage "https://github.com/SeokminHong/kfind"
-  url "https://github.com/SeokminHong/kfind/releases/download/v0.2.0/kfind-0.2.0.tar.gz"
-  sha256 "7f83807628ab461a8f05d543aa17f982f0dbdfc971101b83a42c7762d7451912"
+  url "https://github.com/SeokminHong/kfind/releases/download/v0.2.1/kfind-0.2.1.tar.gz"
+  sha256 "4de6ffb13e000560abf5ca61a4301fdeeed1c7359d7f0c1ab1586898056035c1"
   license "MIT"
 
   head "https://github.com/SeokminHong/kfind.git", branch: "main"
 
-  bottle do
-    root_url "https://github.com/SeokminHong/homebrew-brew/releases/download/kfind-0.2.0"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "fb7db293d8e54d09803375cb2ee8c971727af1ced20185e9ff1b62b00d09e31c"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "f9895515da9fbb9bbd73d1bf0701d1dc96dc75314f5153f908dd1602430c340e"
-    sha256 cellar: :any,                 x86_64_linux:  "0efde48782e61cde9fea66f5ca733f82f4c49802eb7935ba76a5defd426a42c5"
-  end
-
   depends_on "rust" => :build
 
   resource "full-pos-lexicon" do
-    url "https://github.com/SeokminHong/kfind/releases/download/v0.2.0/kfind-full-pos-0.2.0.tar.gz"
+    url "https://github.com/SeokminHong/kfind/releases/download/v0.2.1/kfind-full-pos-0.2.1.tar.gz"
     sha256 "937e27b2068dd8aa38e06af264bea726c9d6b2d8b66f2135a6445f84a526a388"
   end
 
   resource "component-resource" do
-    url "https://github.com/SeokminHong/kfind/releases/download/v0.2.0/kfind-component-0.2.0.tar.gz"
+    url "https://github.com/SeokminHong/kfind/releases/download/v0.2.1/kfind-component-0.2.1.tar.gz"
     sha256 "4f9897fdc5ccb031bb1c370b119b3be6b422510dffb13d55079f317fafd1ac47"
   end
 
   resource "distribution-assets" do
-    url "https://github.com/SeokminHong/kfind/releases/download/v0.2.0/kfind-assets-0.2.0.tar.gz"
-    sha256 "b06dfafecce0cbb140c0a4e88d5c3996da12d182ede3a3ed5e2fcce0deefa8ac"
+    url "https://github.com/SeokminHong/kfind/releases/download/v0.2.1/kfind-assets-0.2.1.tar.gz"
+    sha256 "a304daf226086489f3a33abe5fe53e1e0a751a6b658a5e9e784ee826128a6098"
   end
 
   def install
@@ -49,6 +42,7 @@ class Kfind < Formula
       bash_completion.install "completions/kfind.bash" => "kfind"
       zsh_completion.install "completions/_kfind"
       fish_completion.install "completions/kfind.fish"
+      pkgshare.install "skills"
     end
 
     (share/"doc/kfind/LICENSES").install Dir["LICENSE*"]
@@ -69,5 +63,12 @@ class Kfind < Formula
     component.write("사용자권한을 확인했다.\n대학교를 방문했다.\n")
     assert_match "사용자권한", shell_output("#{bin}/kfind 권한 #{component}")
     assert_empty shell_output("#{bin}/kfind 학교 #{component}", 1)
+
+    assert_predicate pkgshare/"skills/kfind/SKILL.md", :file?
+    assert_match "name: kfind", shell_output("#{bin}/kfind --init --agent custom")
+    system bin/"kfind", "--init", "--agent", "codex"
+    installed_skill = testpath/".agents/skills/kfind/SKILL.md"
+    assert_predicate installed_skill, :symlink?
+    assert_equal (opt_pkgshare/"skills/kfind/SKILL.md").realpath, installed_skill.realpath
   end
 end
