@@ -7,6 +7,13 @@ class Kfind < Formula
 
   head "https://github.com/SeokminHong/kfind.git", branch: "main"
 
+  bottle do
+    root_url "https://github.com/SeokminHong/homebrew-brew/releases/download/kfind-0.2.1"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "a06f0f5008cf52bf85fc2f66334ba25df75a5b7e4480932af9425cc1493103ff"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "05f94d18fd5686b76be4dac061c7c0fbb65102281608967fdb902157e327d5b8"
+    sha256 cellar: :any,                 x86_64_linux:  "a78d2723b76aad7a20c7e85a0dc0abd2ffd03b2c418549058a133bc7dc3cff06"
+  end
+
   depends_on "rust" => :build
 
   resource "full-pos-lexicon" do
