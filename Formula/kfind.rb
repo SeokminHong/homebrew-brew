@@ -1,38 +1,33 @@
 class Kfind < Formula
   desc "Fast Korean lemma and inflection search for code and documents"
   homepage "https://github.com/SeokminHong/kfind"
-  url "https://github.com/SeokminHong/kfind/releases/download/v0.3.0-rc.1/kfind-0.3.0-rc.1.tar.gz"
-  sha256 "f421b0e8a5b66551ca2dadd4d247b604a4aa2fafcccd4767fbaf09d27e52f565"
+  url "https://github.com/SeokminHong/kfind/releases/download/v0.3.0-rc.2/kfind-0.3.0-rc.2.tar.gz"
+  sha256 "a515c0b26bd2f99aa753ed44f21117d60aec1b579f9d2c2b818d16b9b257a7ef"
   license "MIT"
 
   head "https://github.com/SeokminHong/kfind.git", branch: "main"
 
-  bottle do
-    root_url "https://github.com/SeokminHong/homebrew-brew/releases/download/kfind-0.3.0-rc.1"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "93b0ec6121644a8853b030c2e7a83bb42ef55255161701de936244ab4a760ea9"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "9bf53e08f5cd44af27e9ceef6cc31a0ab6677c3ccea34ea1ae878249b444f129"
-    sha256 cellar: :any,                 x86_64_linux:  "537288bbd290ab94279ba52504458c5778e155a995181e571456d0cd7ebad080"
-  end
-
   depends_on "rust" => :build
 
   resource "full-pos-lexicon" do
-    url "https://github.com/SeokminHong/kfind/releases/download/v0.3.0-rc.1/kfind-full-pos-0.3.0-rc.1.tar.gz"
+    url "https://github.com/SeokminHong/kfind/releases/download/v0.3.0-rc.2/kfind-full-pos-0.3.0-rc.2.tar.gz"
     sha256 "937e27b2068dd8aa38e06af264bea726c9d6b2d8b66f2135a6445f84a526a388"
   end
 
   resource "component-resource" do
-    url "https://github.com/SeokminHong/kfind/releases/download/v0.3.0-rc.1/kfind-component-0.3.0-rc.1.tar.gz"
+    url "https://github.com/SeokminHong/kfind/releases/download/v0.3.0-rc.2/kfind-component-0.3.0-rc.2.tar.gz"
     sha256 "4f9897fdc5ccb031bb1c370b119b3be6b422510dffb13d55079f317fafd1ac47"
   end
 
   resource "distribution-assets" do
-    url "https://github.com/SeokminHong/kfind/releases/download/v0.3.0-rc.1/kfind-assets-0.3.0-rc.1.tar.gz"
-    sha256 "5a25bb0fa55686adf58045e92415777ee442eb4c78654ce80f2d096fe35ba73c"
+    url "https://github.com/SeokminHong/kfind/releases/download/v0.3.0-rc.2/kfind-assets-0.3.0-rc.2.tar.gz"
+    sha256 "5381690bd2d44d9dc894fc30ff7208a6d9f4a5608dd38f1183664433ada139b4"
   end
 
   def install
     system "cargo", "install", *std_cargo_args(path: "crates/kfind-cli")
+    pkgshare.install "data/enriched/predicates.tsv" => "predicates.enriched.tsv"
+    (share/"doc/kfind/LICENSES").install "data/enriched/NOTICE.md" => "NIKL-enriched-predicates.md"
 
     resource("full-pos-lexicon").stage do
       pkgshare.install "lexicon.bin", "MANIFEST.toml"
@@ -66,12 +61,17 @@ class Kfind < Formula
     assert_match "source: full-pos-lexicon", explain
     refute_match "full POS lexicon unavailable", explain
 
+    irregular = testpath/"irregular.txt"
+    irregular.write("선을 갈라 두었다.\n")
+    assert_match "갈라", shell_output("#{bin}/kfind --boundary any --pos verb 가르다 #{irregular}")
+
     component = testpath/"component.txt"
     component.write("사용자권한을 확인했다.\n대학교를 방문했다.\n")
     assert_match "사용자권한", shell_output("#{bin}/kfind 권한 #{component}")
     assert_empty shell_output("#{bin}/kfind 학교 #{component}", 1)
 
     assert_predicate pkgshare/"skills/kfind/SKILL.md", :file?
+    assert_predicate pkgshare/"predicates.enriched.tsv", :file?
     assert_match "name: kfind", shell_output("#{bin}/kfind --init --agent custom")
     system bin/"kfind", "--init", "--agent", "codex"
     installed_skill = testpath/".agents/skills/kfind/SKILL.md"
