@@ -1,29 +1,27 @@
 class Kfind < Formula
   desc "Fast Korean lemma and inflection search for code and documents"
   homepage "https://github.com/SeokminHong/kfind"
-  url "https://github.com/SeokminHong/kfind/releases/download/v0.1.1/kfind-0.1.1.tar.gz"
-  sha256 "1304b3cd9509e3d27cfe4ea3594c01af0b609df1d9d331a5728e561c04e3d405"
+  url "https://github.com/SeokminHong/kfind/releases/download/v0.2.0/kfind-0.2.0.tar.gz"
+  sha256 "7f83807628ab461a8f05d543aa17f982f0dbdfc971101b83a42c7762d7451912"
   license "MIT"
 
   head "https://github.com/SeokminHong/kfind.git", branch: "main"
 
-  bottle do
-    root_url "https://github.com/SeokminHong/homebrew-brew/releases/download/kfind-0.1.1"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "2e3630401c21a82943aa5bfd0111d5b476344487ff813398672cc2e91f66d839"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2574607b883104129eea17286a69d9bea05effe6ffe0102a77f2a991cab475af"
-    sha256 cellar: :any,                 x86_64_linux:  "1acfff8977df79bbab2cfc24173ec0aead6171e6de4317de68f406047ffae2dc"
-  end
-
   depends_on "rust" => :build
 
   resource "full-pos-lexicon" do
-    url "https://github.com/SeokminHong/kfind/releases/download/v0.1.1/kfind-full-pos-0.1.1.tar.gz"
-    sha256 "fd4d6a09927c7aa6ebb8a1755bf2a50e9c92c251aa0a18b48436bc17aca452f7"
+    url "https://github.com/SeokminHong/kfind/releases/download/v0.2.0/kfind-full-pos-0.2.0.tar.gz"
+    sha256 "937e27b2068dd8aa38e06af264bea726c9d6b2d8b66f2135a6445f84a526a388"
+  end
+
+  resource "component-resource" do
+    url "https://github.com/SeokminHong/kfind/releases/download/v0.2.0/kfind-component-0.2.0.tar.gz"
+    sha256 "4f9897fdc5ccb031bb1c370b119b3be6b422510dffb13d55079f317fafd1ac47"
   end
 
   resource "distribution-assets" do
-    url "https://github.com/SeokminHong/kfind/releases/download/v0.1.1/kfind-assets-0.1.1.tar.gz"
-    sha256 "1da1880b64e15bdaa28c6c4897864b5687ba092fa8001ad9e9a9eaadcfe014e1"
+    url "https://github.com/SeokminHong/kfind/releases/download/v0.2.0/kfind-assets-0.2.0.tar.gz"
+    sha256 "b06dfafecce0cbb140c0a4e88d5c3996da12d182ede3a3ed5e2fcce0deefa8ac"
   end
 
   def install
@@ -32,6 +30,11 @@ class Kfind < Formula
     resource("full-pos-lexicon").stage do
       pkgshare.install "lexicon.bin", "MANIFEST.toml"
       (share/"doc/kfind/LICENSES").install "LICENSES/mecab-ko-dic-COPYING"
+    end
+
+    resource("component-resource").stage do
+      pkgshare.install "morphology-component-compact.kfc"
+      pkgshare.install "MANIFEST.toml" => "component-MANIFEST.toml"
     end
 
     resource("distribution-assets").stage do
@@ -49,8 +52,15 @@ class Kfind < Formula
     sample.write("아주 예쁜 길을 걸어 갔다.\n")
 
     assert_match "걸어", shell_output("#{bin}/kfind 걷다 #{sample}")
+    agent = shell_output("#{bin}/kfind --embedded --boundary any --pos verb --json 걷다 #{sample}")
+    assert_match '"text":"아주 예쁜 길을 걸어 갔다.\\n"', agent
     explain = shell_output("#{bin}/kfind 아주 #{sample} --explain-query")
     assert_match "source: full-pos-lexicon", explain
     refute_match "full POS lexicon unavailable", explain
+
+    component = testpath/"component.txt"
+    component.write("사용자권한을 확인했다.\n대학교를 방문했다.\n")
+    assert_match "사용자권한", shell_output("#{bin}/kfind 권한 #{component}")
+    assert_empty shell_output("#{bin}/kfind 학교 #{component}", 1)
   end
 end
