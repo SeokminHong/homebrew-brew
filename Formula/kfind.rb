@@ -1,34 +1,27 @@
 class Kfind < Formula
   desc "Fast Korean lemma and inflection search for code and documents"
   homepage "https://github.com/SeokminHong/kfind"
-  url "https://github.com/SeokminHong/kfind/releases/download/v0.3.0-rc.2/kfind-0.3.0-rc.2.tar.gz"
-  sha256 "a515c0b26bd2f99aa753ed44f21117d60aec1b579f9d2c2b818d16b9b257a7ef"
+  url "https://github.com/SeokminHong/kfind/releases/download/v0.3.0-rc.3/kfind-0.3.0-rc.3.tar.gz"
+  sha256 "82a576245e95619fcbb15faeb634413186ed238dc63521c37a4ac5cc7f91a4e8"
   license "MIT"
 
   head "https://github.com/SeokminHong/kfind.git", branch: "main"
 
-  bottle do
-    root_url "https://github.com/SeokminHong/homebrew-brew/releases/download/kfind-0.3.0-rc.2"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "9199875823bf0d4e426aeb28ccf8c7112d76d72f51710fc4e98e75262e11049a"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "5a1df6dbc180029d655ee7535c4d8bdd2ce0bff857ca1ec0f5a76b691814a3e1"
-    sha256 cellar: :any,                 x86_64_linux:  "369b1038349bca0a501313006455f916d1096e5a6bca4cf3868d51064f664322"
-  end
-
   depends_on "rustup" => :build
 
   resource "full-pos-lexicon" do
-    url "https://github.com/SeokminHong/kfind/releases/download/v0.3.0-rc.2/kfind-full-pos-0.3.0-rc.2.tar.gz"
+    url "https://github.com/SeokminHong/kfind/releases/download/v0.3.0-rc.3/kfind-full-pos-0.3.0-rc.3.tar.gz"
     sha256 "937e27b2068dd8aa38e06af264bea726c9d6b2d8b66f2135a6445f84a526a388"
   end
 
   resource "component-resource" do
-    url "https://github.com/SeokminHong/kfind/releases/download/v0.3.0-rc.2/kfind-component-0.3.0-rc.2.tar.gz"
+    url "https://github.com/SeokminHong/kfind/releases/download/v0.3.0-rc.3/kfind-component-0.3.0-rc.3.tar.gz"
     sha256 "4f9897fdc5ccb031bb1c370b119b3be6b422510dffb13d55079f317fafd1ac47"
   end
 
   resource "distribution-assets" do
-    url "https://github.com/SeokminHong/kfind/releases/download/v0.3.0-rc.2/kfind-assets-0.3.0-rc.2.tar.gz"
-    sha256 "5381690bd2d44d9dc894fc30ff7208a6d9f4a5608dd38f1183664433ada139b4"
+    url "https://github.com/SeokminHong/kfind/releases/download/v0.3.0-rc.3/kfind-assets-0.3.0-rc.3.tar.gz"
+    sha256 "e662dd950c8f2aa16bd499597ae376b2b28cc12c2fca6a51bad073d70a5a08f9"
   end
 
   def install
