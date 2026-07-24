@@ -5,6 +5,13 @@ class Kfind < Formula
   sha256 "4645a656c7c931f06c9818293b46f0ec07ebab13ddfc7551fc3f1c1220ec51b0"
   license :cannot_represent
 
+  bottle do
+    root_url "https://github.com/SeokminHong/homebrew-brew/releases/download/kfind-1.0.0-rc.3"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "f6b17789cc4abea15b81096d9fddc4f72d1f035dcb1e37f36e09b6f6c0129c6d"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1252face967eca33c96b1aaaaa40f0d5fb3f62bca6f1b0c60bb15d960ae558b6"
+    sha256 cellar: :any,                 x86_64_linux:  "f37119a1f85bbca19d617092be2c2d64fe9eb8f6e5620012d32628025bc6c93f"
+  end
+
   depends_on "rustup" => :build
 
   resource "full-pos-lexicon" do
