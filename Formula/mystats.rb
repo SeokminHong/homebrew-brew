@@ -7,6 +7,12 @@ class Mystats < Formula
 
   head "https://github.com/SeokminHong/mystats.git", branch: "main"
 
+  bottle do
+    root_url "https://github.com/SeokminHong/homebrew-brew/releases/download/mystats-0.2.6"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "5cf8cbc54c474db9dec8e924f5bfc231cb0d355ced915ad2ab41e2166d648456"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "7afd9e98f8c973e651ae74046c62b442852122e4f97c466cc9c122845b162d7b"
+  end
+
   depends_on xcode: ["15.0", :build]
   depends_on arch: :arm64
   depends_on macos: :ventura
