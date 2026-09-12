@@ -1,17 +1,11 @@
 class Mystats < Formula
   desc "Lightweight Apple Silicon menu bar monitor for macOS"
   homepage "https://github.com/SeokminHong/mystats"
-  url "https://github.com/SeokminHong/mystats/archive/refs/tags/v0.2.4.tar.gz"
-  sha256 "de2002cef60ed2e0505e1dc77c40a87b973c9fe77861e2f962ef71de4d50fdc3"
+  url "https://github.com/SeokminHong/mystats/archive/refs/tags/v0.2.5.tar.gz"
+  sha256 "f19de16c74c98f9619a634f4ee4a25537c8d74f5d2f5d4f92abbf871838a3fa0"
   license "MIT"
 
   head "https://github.com/SeokminHong/mystats.git", branch: "main"
-
-  bottle do
-    root_url "https://github.com/SeokminHong/homebrew-brew/releases/download/mystats-0.2.4"
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "5dffa45156cccab926133486252b0bd50e510caa1871231ae5c41eb0dddfeeb1"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "c0cc3e511121b7aee0e4d3103311335db50ceaa03db68b9051c7850374c96159"
-  end
 
   depends_on xcode: ["15.0", :build]
   depends_on arch: :arm64
@@ -73,7 +67,7 @@ class Mystats < Formula
   end
 
   test do
-    assert_match "mystats 0.2.4", shell_output("#{bin}/mystats --version")
+    assert_match "mystats 0.2.5", shell_output("#{bin}/mystats --version")
     assert_path_exists prefix/"mystats.app/Contents/MacOS/mystats"
     assert_path_exists prefix/"mystats.app/Contents/Info.plist"
   end
