@@ -1,8 +1,8 @@
 class Mystats < Formula
   desc "Lightweight Apple Silicon menu bar monitor for macOS"
   homepage "https://github.com/SeokminHong/mystats"
-  url "https://github.com/SeokminHong/mystats/archive/refs/tags/v0.2.5.tar.gz"
-  sha256 "f19de16c74c98f9619a634f4ee4a25537c8d74f5d2f5d4f92abbf871838a3fa0"
+  url "https://github.com/SeokminHong/mystats/archive/refs/tags/v0.2.6.tar.gz"
+  sha256 "0e1e759b0dd0bd463b11716be69c1c4e6f73c3b1ca03300bb9e046ea40943e3c"
   license "MIT"
 
   head "https://github.com/SeokminHong/mystats.git", branch: "main"
@@ -67,7 +67,7 @@ class Mystats < Formula
   end
 
   test do
-    assert_match "mystats 0.2.5", shell_output("#{bin}/mystats --version")
+    assert_match "mystats 0.2.6", shell_output("#{bin}/mystats --version")
     assert_path_exists prefix/"mystats.app/Contents/MacOS/mystats"
     assert_path_exists prefix/"mystats.app/Contents/Info.plist"
   end
