@@ -1,33 +1,25 @@
 class Kfind < Formula
   desc "Fast Korean lemma and inflection search for code and documents"
   homepage "https://github.com/SeokminHong/kfind"
-  url "https://github.com/SeokminHong/kfind/releases/download/v1.0.1/kfind-1.0.1.tar.gz"
-  sha256 "da0faae17b0d0bb0004a1f74282887fc9b2b40ed9a1163449fa32770f0db65f5"
+  url "https://github.com/SeokminHong/kfind/releases/download/v1.1.0/kfind-1.1.0.tar.gz"
+  sha256 "d76d90fdde120bda935042a25f1cc27a89607d9f6276fd38ef6c0fc994ead178"
   license :cannot_represent
-
-  bottle do
-    root_url "https://github.com/SeokminHong/homebrew-brew/releases/download/kfind-1.0.1"
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "5116a1451a7a59516752071453f1143ee67c242d7b5dbdab12fde02e3e08455a"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "aec6f5369f7a285fd6c0929fd469946eab8621e6fbea6165baca5dc09c9e38e3"
-    sha256 cellar: :any,                 x86_64_linux:  "b2035c0365ed7b7ab2e9217221a498be2f43766cda6705594e28313bc5acf451"
-  end
 
   depends_on "rustup" => :build
 
   resource "full-pos-lexicon" do
-    url "https://github.com/SeokminHong/kfind/releases/download/v1.0.1/kfind-full-pos-1.0.1.tar.gz"
+    url "https://github.com/SeokminHong/kfind/releases/download/v1.1.0/kfind-full-pos-1.1.0.tar.gz"
     sha256 "937e27b2068dd8aa38e06af264bea726c9d6b2d8b66f2135a6445f84a526a388"
   end
 
   resource "component-resource" do
-    url "https://github.com/SeokminHong/kfind/releases/download/v1.0.1/kfind-component-1.0.1.tar.gz"
-    sha256 "20f844320684fb5d049eaf8ad7bbad21aebdc067ec4a25d296018efb467f30fe"
+    url "https://github.com/SeokminHong/kfind/releases/download/v1.1.0/kfind-component-1.1.0.tar.gz"
+    sha256 "d15db39e975965d967b4dbdae7df45cfb5a340e9b4e1900c81b2dca0cdc6df80"
   end
 
   resource "distribution-assets" do
-    url "https://github.com/SeokminHong/kfind/releases/download/v1.0.1/kfind-assets-1.0.1.tar.gz"
-    sha256 "230d85176cfd95267e5ce8d3604c8fe93e27d049dcf41b6399db47863a333007"
+    url "https://github.com/SeokminHong/kfind/releases/download/v1.1.0/kfind-assets-1.1.0.tar.gz"
+    sha256 "40fb8328957c53001ed74e6624fe50cce5782c98fb63f68e20728469c30270b0"
   end
 
   def install
@@ -59,8 +51,8 @@ class Kfind < Formula
     (share/"doc/kfind/LICENSES").install Dir["LICENSE*"]
   end
 
-  post_install_steps do
-    run "kfind", args: ["--check-data", "--data-dir", "{{pkgshare}}"], base: :bin, print_stdout: true
+  def post_install
+    system bin/"kfind", "--check-data", "--data-dir", pkgshare
   end
 
   test do
@@ -84,7 +76,7 @@ class Kfind < Formula
     assert_match "대학교를 방문했다.", shell_output("#{bin}/kfind 학교 #{component}")
     data_check = shell_output("#{bin}/kfind --check-data --json --data-dir #{pkgshare}")
     assert_match '"status":"ok"', data_check
-    assert_match '"resource_version":"1.0.1"', data_check
+    assert_match '"resource_version":"1.1.0"', data_check
 
     assert_predicate pkgshare/"skills/kfind/SKILL.md", :file?
     assert_predicate pkgshare/"predicates.enriched.tsv", :file?
