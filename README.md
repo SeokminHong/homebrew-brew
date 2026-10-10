@@ -2,6 +2,7 @@
 
 ## formulae
 
+- [caps-switch](https://github.com/SeokminHong/caps-switch): Caps Lock remapping menu bar app for macOS.
 - [fenv](https://github.com/SeokminHong/fenv): direnv alternative for Fish shell.
 - [kfind](https://github.com/SeokminHong/kfind): Fast Korean lemma and inflection search for code and documents.
 - [mystats](https://github.com/SeokminHong/mystats): Apple Silicon menu bar monitor for macOS.
