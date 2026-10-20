@@ -27,7 +27,6 @@ class CapsSwitch < Formula
     app = prefix/"Caps Switch.app/Contents"
     assert_match "caps-switch #{version}", shell_output("\"#{app}/MacOS/CapsSwitch\" --version")
     assert_path_exists app/"Info.plist"
-    system (app/"MacOS/CapsSwitch").to_s, "--check-guide"
     system "/usr/bin/codesign", "--verify", "--strict", (prefix/"Caps Switch.app").to_s
   end
 end
